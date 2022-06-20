@@ -333,13 +333,13 @@ class ClientTGLogs():
         :param type_log: Принимает значение (Standart/Custom) которое обозначает формат логов                                   =>(String)
         :return: Отправляет сообщение с логом в Телеграмм чат                                                                   =>(No return)
         '''
-
+        today = datetime.now()
         log_text=str(log_text)
         bot=tb.TeleBot(self.bot_token)
         if type_log=="Standart":
-            bot.send_message(self.chat_id,f"Project name: {self.project_name}, file_name: {self.file_name}, Log: {log_text}",parse_mode=self.Parser_mode)
+            bot.send_message(self.chat_id,f"Project name: {self.project_name}, file_name: {self.file_name}, Log: {log_text}, Date: {str(today)}",parse_mode=self.Parser_mode)
         elif type_log=="Custom":
-            bot.send_message(self.chat_id,f"{log_text}",parse_mode=self.Parser_mode)    
+            bot.send_message(self.chat_id,f"{log_text}, Date: {str(today)}",parse_mode=self.Parser_mode)    
 
 
         # ---------------------------------------------------------------------------------
@@ -360,8 +360,6 @@ class ClientTGLogs():
 
         # BDLogsbot >>> "Project name: Project 1, file_name: ipykernel_launcher.py, Log: line 37"
         # ---------------------------------------------------------------------------------
-
-
 
         # Хорошая задумка реализовать функцию Help
         # def __help__(self,*func_name):
