@@ -2,7 +2,9 @@ from ast import Try
 from datetime import datetime
 from datetime import timedelta
 from http import client
+import telebot as tb
 import os
+import sys
 import colorama as cg
 from numpy import percentile
 
@@ -10,7 +12,7 @@ from numpy import percentile
 
 
 
-class LogControler:
+class ClientFileLogs:
     
     def __init__(self,log_way='logs.log',*args,**kwargs):
         '''    
@@ -294,6 +296,81 @@ class LogControler:
         # ---------------------------------------------------------------------------------
 
 
+
+class ClientTGLogs():
+    def __init__(self,Bot_token='5197006502:AAFrog4iHOh_4qZSexvCxTYhLYnNCqOIsMM',
+                Chat_id=405023882,
+                parse_mode='HTML',
+                Project_name="Project1",
+                File_name="",
+                *args,**kwargs):
+        
+        '''    
+        :param Bot_token: Принимает строку с API токеном бота, при игнорировании принимает стандартный токен бота от библиотеки =>(String)
+        :param Chat_id: Принимает целое число означающее ID чата                                                                =>(Int)
+        :param parse_mode: Принимает строку с типом парсинг мода сообщений бота                                                 =>(String)
+        :param Project_name: Принимает строку с названием проекта                                                               =>(String)
+        :param File_name: Принимает строку с названием файла, при игнорировании принимает название изначального файла           =>(String)
+        :return: Создает клиент для управления Логами в Телеграмм боте                                                          =>(No return)
+        '''
+
+        if File_name=="":
+            way=sys.argv[0]
+            File_name=way.split('\\')[-1]
+
+        self.bot_token=Bot_token
+        self.chat_id=int(Chat_id)
+        self.Parser_mode=parse_mode
+        self.project_name=Project_name
+        self.file_name=File_name
+
+
+    
+    def send_log(self,log_text="Test log text",type_log="Standart"):
+
+        '''    
+        :param log_text : Принимает строку с текстом лога                                                                       =>(String)
+        :param type_log: Принимает значение (Standart/Custom) которое обозначает формат логов                                   =>(String)
+        :return: Отправляет сообщение с логом в Телеграмм чат                                                                   =>(No return)
+        '''
+
+        log_text=str(log_text)
+        bot=tb.TeleBot(self.bot_token)
+        if type_log=="Standart":
+            bot.send_message(self.chat_id,f"Project name: {self.project_name}, file_name: {self.file_name}, Log: {log_text}",parse_mode=self.Parser_mode)
+        elif type_log=="Custom":
+            bot.send_message(self.chat_id,f"{log_text}",parse_mode=self.Parser_mode)    
+
+
+        # ---------------------------------------------------------------------------------
+        # Пример применения метода send_log
+        # import traceback
+        # tellog=ClientTGLogs()
+        # try:
+        #     lst=[1,2]
+        #     for i,b in lst:
+        #         print(i)
+        # except Exception as e:
+
+        #     bag=traceback.format_exc()
+        #     bag_line=bag.split(',')[1][1:]    
+        #     tellog.send_log(bag_line,type_log="Standart")
+        # ----------------------------------result of working------------------------------
+        # bot message: result:
+
+        # BDLogsbot >>> "Project name: Project 1, file_name: ipykernel_launcher.py, Log: line 37"
+        # ---------------------------------------------------------------------------------
+
+
+
+        # Хорошая задумка реализовать функцию Help
+        # def __help__(self,*func_name):
+        #     func_name=func_name[0].__name__
+        #     if "send_log" in func_name:
+        #         print(self.send_log.Explanation)
+    
+
+    
 
 
 
