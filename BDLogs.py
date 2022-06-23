@@ -6,6 +6,7 @@ import telebot as tb
 import os
 import sys
 import colorama as cg
+import json
 from numpy import percentile
 
 # mom's friend's son's logs
@@ -28,6 +29,11 @@ class ClientFileLogs:
             l.write(f'Log: {log},  Date: {today} \n')
             print(f'Log: {log},  Date: {today} \n')
 
+    def __help__(self,*func_name):
+        with open('help.json','r') as f:
+            Help_js = json.load(f)
+        for method in func_name:
+            print(Help_js['ClientFileLogs'][method.__name__])
     # ---------------------------------------------------------------------------------
     # Пример применения метода __call__
     # client=LogControler(log_way='logs.log')
@@ -316,7 +322,7 @@ class ClientTGLogs():
 
         if File_name=="":
             way=sys.argv[0]
-            File_name=way.split('\\')[-1]
+            File_name=way.split('/')[-1]
 
         self.bot_token=Bot_token
         self.chat_id=int(Chat_id)
@@ -362,10 +368,22 @@ class ClientTGLogs():
         # ---------------------------------------------------------------------------------
 
         # Хорошая задумка реализовать функцию Help
-        # def __help__(self,*func_name):
-        #     func_name=func_name[0].__name__
-        #     if "send_log" in func_name:
-        #         print(self.send_log.Explanation)
+    def __help__(self,*func_name):
+        with open('help.json','r') as f:
+            Help_js = json.load(f)
+        for method in func_name:
+            print(Help_js['ClientTGLogs'][method.__name__])
+
+
+
+
+Client=ClientTGLogs()
+Client.__help__(Client.send_log)
+# print(Client.send_log.__name__)
+
+
+
+
     
 
     

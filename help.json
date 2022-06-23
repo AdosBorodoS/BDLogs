@@ -1,0 +1,8 @@
+{"ClientFileLogs":{
+    "custom_w_logs":"http://data-scientist-borodin-danila/project_BDLogs/ClientTGLogs/send_log.ru/",
+    "__help__":"http://data-scientist-borodin-danila/project_BDLogs/ClientFileLogs/help.ru/"},
+
+"ClientTGLogs":{
+    "send_log":"http://data-scientist-borodin-danila/project_BDLogs/ClientFileLogs/send_log.ru/",
+    "__help__":"http://data-scientist-borodin-danila/project_BDLogs/ClientTGLogs/help.ru/"}
+}
