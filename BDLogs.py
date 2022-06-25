@@ -375,15 +375,6 @@ class ClientTGLogs():
             print(Help_js['ClientTGLogs'][method.__name__])
 
 
-
-
-Client=ClientTGLogs()
-Client.__help__(Client.send_log)
-# print(Client.send_log.__name__)
-
-
-
-
     
 
     
