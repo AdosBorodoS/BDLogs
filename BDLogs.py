@@ -330,8 +330,12 @@ class ClientTGLogs():
         self.project_name=Project_name
         self.file_name=File_name
 
+    def __help__(self,*func_name):
+        with open('help.json','r') as f:
+            Help_js = json.load(f)
+        for method in func_name:
+            print(Help_js['ClientTGLogs'][method.__name__])
 
-    
     def send_log(self,log_text="Test log text",type_log="Standart"):
 
         '''    
@@ -368,16 +372,31 @@ class ClientTGLogs():
         # ---------------------------------------------------------------------------------
 
         # Хорошая задумка реализовать функцию Help
-    def __help__(self,*func_name):
-        with open('help.json','r') as f:
-            Help_js = json.load(f)
-        for method in func_name:
-            print(Help_js['ClientTGLogs'][method.__name__])
+
+
+    # Статус чек, при вводе команды в ТГ выводит текущий результат работы
+    # def status_check(self, status_log="", project_name="Project1",file_name="",):
+    #     bot=tb.TeleBot(self.bot_token)
+    #     @bot.message_handler(commands=["StatusCheck"])
+    #     def Check_func(massege):
+    #         print(massege.text)
+        
+    #     bot.polling(none_stop = None)
 
 
     
 
-    
+# ________________________Test_Plase__________________________
+
+# import time as t
+
+# tellog=ClientTGLogs()
+# clientlog=ClientFileLogs()
+# for i in range(60):
+#     t.sleep(1)
+#     logstring=f"{str(i)}/{60}"
+#     clientlog.custom_w_logs(logstring)
+#     l=tellog.status_check()
 
 
 
